@@ -67,7 +67,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Te-SV-hSG">
-                                <rect key="frame" x="0.0" y="529" width="375" height="249"/>
+                                <rect key="frame" x="0.0" y="529" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -75,11 +75,12 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="71S-JS-Vi0"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="jHg-xT-2W7"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="K4y-BG-fsa"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tdk-dJ-QPr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="255" y="-73"/>
+            <point key="canvasLocation" x="253.59999999999999" y="-73.152709359605907"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="LrK-NC-evW">
