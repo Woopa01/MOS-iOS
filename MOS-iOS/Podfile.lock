@@ -14,6 +14,10 @@ PODS:
   - PINRemoteImage/PINCache (3.0.0-beta.13):
     - PINCache (= 3.0.1-beta.6)
     - PINRemoteImage/Core
+  - RxASControlEvent (0.1.0):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+    - Texture
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxSwift (4.5.0)
@@ -39,6 +43,7 @@ PODS:
     - Texture/Core
 
 DEPENDENCIES:
+  - RxASControlEvent
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - Texture
@@ -48,6 +53,7 @@ SPEC REPOS:
     - PINCache
     - PINOperation
     - PINRemoteImage
+    - RxASControlEvent
     - RxCocoa
     - RxSwift
     - Texture
@@ -56,10 +62,11 @@ SPEC CHECKSUMS:
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
+  RxASControlEvent: 459d5c55acf88f0010b4fb8c83a31c1210de7fc7
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   Texture: fc6e0157201f3a6e503d364c147b1872e365cef4
 
-PODFILE CHECKSUM: 734d80cdde483aec6787e236cd7204853bb03a93
+PODFILE CHECKSUM: 9ca91c8264444aa789083165e0b5d47e777706fa
 
 COCOAPODS: 1.5.3
