@@ -24,8 +24,8 @@
                                 <color key="textColor" red="0.89803921568627454" green="0.25490196078431371" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나만의 작은 SNS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOf-EX-m35">
-                                <rect key="frame" x="120" y="258" width="135" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 보고 싶은 것만," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOf-EX-m35">
+                                <rect key="frame" x="108.66666666666669" y="258" width="158" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -53,8 +53,8 @@
                                 <rect key="frame" x="108" y="748" width="159" height="30"/>
                                 <state key="normal" title="이미 아이디가 있으신가요?"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 보고 싶은 것만," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2H-ha-FBg">
-                                <rect key="frame" x="108.66666666666669" y="290" width="158" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나만의 작은 SNS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2H-ha-FBg">
+                                <rect key="frame" x="120" y="290" width="135" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -97,7 +97,7 @@
         <!--View Controller-->
         <scene sceneID="Di2-XI-NEU">
             <objects>
-                <viewController id="bqQ-Sh-9ci" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SIgnUpVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bqQ-Sh-9ci" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G4r-FH-75O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
