@@ -217,11 +217,11 @@
 		6838C9D7224A020200FB802A /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				68E0952922519A27004E8ADC /* MyPage */,
 				68E0952822519A22004E8ADC /* Qna */,
 				68E0952722519A1C004E8ADC /* Posts */,
 				68386BCA2250F8AD007BEB71 /* Login */,
 				6838C9A52249F33100FB802A /* MainVC.swift */,
+				68E0952922519A27004E8ADC /* MyPage */,
 			);
 			path = VC;
 			sourceTree = "<group>";

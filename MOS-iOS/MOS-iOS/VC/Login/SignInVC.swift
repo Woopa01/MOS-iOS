@@ -44,7 +44,7 @@ class SignInVC : ASViewController<ASDisplayNode> {
         node.shadowColor = UIColor.black.withAlphaComponent(0.3).cgColor
         node.setTitle("페이스북으로 시작하기", with: UIFont.systemFont(ofSize: 15, weight: .medium), with: .white , for: UIControl.State.normal)
         node.backgroundColor = Color.BLUE.getColor()
-        node.rx.event(.touchDown).subscribe(onNext: { _ in
+        node.rx.event(.touchUpInside).subscribe(onNext: { _ in
             print("fbButtonDidClicked")
         })
         return node
@@ -60,16 +60,18 @@ class SignInVC : ASViewController<ASDisplayNode> {
         node.setTitle("이메일로 시작하기", with: UIFont.systemFont(ofSize: 15, weight: .medium), with: .black , for: UIControl.State.normal)
         node.backgroundColor = .white
         node.borderWidth = 0.5
-//        node.rx.event(.touchDown).subscribe(onNext: { _ in
-//            self.dismiss(animated: true, completion: nil)
-//            self.navigationController?.pushViewController(SignUpVC(), animated: true)})
+        node.rx.event(.touchUpInside).subscribe(onNext: { _ in
+            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.pushViewController(SignUpVC(), animated: true)})
         return node
     }()
     
-    lazy var signUpButtonNode : ASButtonNode = { () -> ASButtonNode in
+    lazy var signInButtonNode : ASButtonNode = { () -> ASButtonNode in
         let node = ASButtonNode()
         node.setAttributedTitle(NSAttributedString(string: "이미 아이디가 있으신가요?"), for: .normal)
-        node.rx.event(.touchDown).subscribe(onNext: { _ in
+        node.rx.event(.touchUpInside).subscribe(onNext: { _ in
+            self.dismiss(animated: true, completion: nil)
+            self.present(self.initTabBarController(), animated: true, completion: nil)
         })
         return node
     }()
@@ -95,7 +97,7 @@ class SignInVC : ASViewController<ASDisplayNode> {
                                                 strongSelf.desc2Node,
                                                 strongSelf.fbButtonNode,
                                                 strongSelf.emailButtonNode,
-                                                strongSelf.signUpButtonNode])
+                                                strongSelf.signInButtonNode])
         }
         
     }
@@ -105,7 +107,6 @@ class SignInVC : ASViewController<ASDisplayNode> {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        emailButtonNode.addTarget(self, action: #selector(SignInVC.goNext), forControlEvents: .touchDown)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -114,9 +115,15 @@ class SignInVC : ASViewController<ASDisplayNode> {
 }
 
 extension SignInVC {
-    @objc func goNext(){
-        let signUpVC = self.storyboard?.instantiateViewController(withIdentifier: "SignUpVC")
-        self.navigationController?.pushViewController(signUpVC!, animated: true)
+    func initTabBarController() -> UITabBarController{
+        let tabBarController = UITabBarController()
+        let posts = UINavigationController(rootViewController: PostsVC())
+        let user = UINavigationController(rootViewController: MyPageVC())
+        posts.tabBarItem = UITabBarItem(title: "posts", image: nil, selectedImage: nil)
+        user.tabBarItem = UITabBarItem(title: "user", image: nil, selectedImage: nil)
+        tabBarController.setViewControllers([posts, user], animated: false)
+        
+        return tabBarController
     }
 }
 
