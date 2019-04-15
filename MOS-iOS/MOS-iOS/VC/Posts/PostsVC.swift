@@ -8,9 +8,17 @@
 
 import Foundation
 import UIKit
+import AsyncDisplayKit
 
-class PostsVC : UIViewController {
-    override func viewDidLoad() {
-        
+class PostsVC : ASViewController<ASDisplayNode> {
+    
+    init() {
+        super.init(node: ASDisplayNode())
+        node.backgroundColor = .white
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
