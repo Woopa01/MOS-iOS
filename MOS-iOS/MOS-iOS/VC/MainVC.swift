@@ -27,10 +27,10 @@ class MainVC : ASViewController<ASScrollNode> {
         node.scrollableDirections = .down
         node.automaticallyManagesSubnodes = true
         node.automaticallyManagesContentSize = true
-        node.layoutSpecBlock = { [weak self] node, constrainedSize in
-            let strongSelf = self; else { return ASLayoutSpec() }
-            return ASInsetLayoutSpec(insets: .init(top: 0.0 , left: 0.0 , bottom: 0.0, right: 0.0), child: strongSelf.appNameNode )
-        }
+//        node.layoutSpecBlock = { [weak self] node, constrainedSize in
+//            let strongSelf = self; else { return ASLayoutSpec() }
+//            return ASInsetLayoutSpec(insets: .init(top: 0.0 , left: 0.0 , bottom: 0.0, right: 0.0), child: strongSelf.appNameNode )
+//        }
     }
     
     required init?(coder aDecoder: NSCoder) {
