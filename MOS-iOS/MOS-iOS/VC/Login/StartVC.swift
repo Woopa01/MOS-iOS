@@ -9,9 +9,11 @@
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
-import RxASControlEvent
+import RxCocoa_Texture
 
-class SignInVC : ASViewController<ASDisplayNode> {
+class StartVC : ASViewController<ASDisplayNode> {
+    var viewModel = StartViewModel()
+    let disposeBag = DisposeBag()
     
     lazy var titleNode : ASTextNode = { () -> ASTextNode in
         let node = ASTextNode()
@@ -24,14 +26,16 @@ class SignInVC : ASViewController<ASDisplayNode> {
     lazy var desc1Node : ASTextNode = { () -> ASTextNode in
         let node = ASTextNode()
         node.attributedText = NSAttributedString(string: "내가 보고 싶은 것만,", attributes: [
-            .font: UIFont.systemFont(ofSize: 20)])
+            .font: UIFont.systemFont(ofSize: 20),
+            .foregroundColor : UIColor.lightGray ])
         return node
     }()
     
     lazy var desc2Node : ASTextNode = { () -> ASTextNode in
         let node = ASTextNode()
         node.attributedText = NSAttributedString(string: "나만의 작은 SNS", attributes: [
-            .font: UIFont.systemFont(ofSize: 20)])
+            .font: UIFont.systemFont(ofSize: 20),
+            .foregroundColor : UIColor.lightGray ])
         return node
     }()
     
@@ -44,9 +48,6 @@ class SignInVC : ASViewController<ASDisplayNode> {
         node.shadowColor = UIColor.black.withAlphaComponent(0.3).cgColor
         node.setTitle("페이스북으로 시작하기", with: UIFont.systemFont(ofSize: 15, weight: .medium), with: .white , for: UIControl.State.normal)
         node.backgroundColor = Color.BLUE.getColor()
-        node.rx.event(.touchUpInside).subscribe(onNext: { _ in
-            print("fbButtonDidClicked")
-        })
         return node
     }()
     
@@ -60,25 +61,19 @@ class SignInVC : ASViewController<ASDisplayNode> {
         node.setTitle("이메일로 시작하기", with: UIFont.systemFont(ofSize: 15, weight: .medium), with: .black , for: UIControl.State.normal)
         node.backgroundColor = .white
         node.borderWidth = 0.5
-        node.rx.event(.touchUpInside).subscribe(onNext: { _ in
-            self.dismiss(animated: true, completion: nil)
-            self.navigationController?.pushViewController(SignUpVC(), animated: true)})
         return node
     }()
     
     lazy var signInButtonNode : ASButtonNode = { () -> ASButtonNode in
         let node = ASButtonNode()
         node.setAttributedTitle(NSAttributedString(string: "이미 아이디가 있으신가요?"), for: .normal)
-        node.rx.event(.touchUpInside).subscribe(onNext: { _ in
-            self.dismiss(animated: true, completion: nil)
-            self.present(self.initTabBarController(), animated: true, completion: nil)
-        })
         return node
     }()
     
     
     init() {
         super.init(node: ASDisplayNode())
+        
         node.automaticallyManagesSubnodes = true
         node.layoutSpecBlock = {[weak self] (_,_) -> ASLayoutSpec in
             guard  let strongSelf = self else { return ASLayoutSpec() }
@@ -98,8 +93,9 @@ class SignInVC : ASViewController<ASDisplayNode> {
                                                 strongSelf.fbButtonNode,
                                                 strongSelf.emailButtonNode,
                                                 strongSelf.signInButtonNode])
+            
         }
-        
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,7 +110,7 @@ class SignInVC : ASViewController<ASDisplayNode> {
     }
 }
 
-extension SignInVC {
+extension StartVC {
     func initTabBarController() -> UITabBarController{
         let tabBarController = UITabBarController()
         let posts = UINavigationController(rootViewController: PostsVC())
@@ -125,6 +121,45 @@ extension SignInVC {
         
         return tabBarController
     }
+    
+    func bindViewModel() {
+        viewModel = StartViewModel()
+        
+        fbButtonNode.rx
+            .tap(to: viewModel.fbLoginDidClicked)
+            .disposed(by: disposeBag)
+        
+        emailButtonNode.rx
+            .tap(to: viewModel.emailSignUpDidClicked)
+            .disposed(by: disposeBag)
+        
+        signInButtonNode.rx
+            .tap(to: viewModel.emailSignInDidCilcked)
+            .disposed(by: disposeBag)
+        
+        viewModel.fbResult
+            .drive(onNext: { isTrue in
+                if isTrue {
+                    
+                }
+            }).disposed(by: disposeBag)
+        
+        viewModel.emailSignUpResult
+            .drive(onNext: { isTrue in
+                if isTrue {
+                    self.navigationController?.pushViewController(SignUpVC(), animated: true)
+                }
+            }).disposed(by: disposeBag)
+        
+        viewModel.emailSignInResult
+            .drive(onNext: { isTrue in
+                if isTrue {
+                    self.navigationController?.pushViewController(EmailSignInVC(), animated: true)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
 }
+
 
 

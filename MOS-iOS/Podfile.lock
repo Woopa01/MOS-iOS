@@ -20,6 +20,10 @@ PODS:
     - Texture
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxCocoa-Texture (2.3.0):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+    - Texture (= 2.8)
   - RxSwift (4.5.0)
   - Texture (2.8):
     - Texture/AssetsLibrary (= 2.8)
@@ -45,6 +49,7 @@ PODS:
 DEPENDENCIES:
   - RxASControlEvent
   - RxCocoa (~> 4.0)
+  - RxCocoa-Texture
   - RxSwift (~> 4.0)
   - Texture
 
@@ -55,6 +60,7 @@ SPEC REPOS:
     - PINRemoteImage
     - RxASControlEvent
     - RxCocoa
+    - RxCocoa-Texture
     - RxSwift
     - Texture
 
@@ -64,9 +70,10 @@ SPEC CHECKSUMS:
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
   RxASControlEvent: 459d5c55acf88f0010b4fb8c83a31c1210de7fc7
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxCocoa-Texture: e93fe1e32772d3f744069aeea16abe38f94ec8b2
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   Texture: fc6e0157201f3a6e503d364c147b1872e365cef4
 
-PODFILE CHECKSUM: 9ca91c8264444aa789083165e0b5d47e777706fa
+PODFILE CHECKSUM: eed22246b0b68a621ac23bcdf1b4f88c783f19dd
 
 COCOAPODS: 1.5.3
