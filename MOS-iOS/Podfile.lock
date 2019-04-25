@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.8.2)
   - PINCache (3.0.1-beta.6):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
     - PINCache/Core (= 3.0.1-beta.6)
@@ -14,6 +15,11 @@ PODS:
   - PINRemoteImage/PINCache (3.0.0-beta.13):
     - PINCache (= 3.0.1-beta.6)
     - PINRemoteImage/Core
+  - RxAlamofire (4.4.1):
+    - RxAlamofire/Core (= 4.4.1)
+  - RxAlamofire/Core (4.4.1):
+    - Alamofire (~> 4.8)
+    - RxSwift (~> 4.5)
   - RxASControlEvent (0.1.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
@@ -47,6 +53,7 @@ PODS:
     - Texture/Core
 
 DEPENDENCIES:
+  - RxAlamofire
   - RxASControlEvent
   - RxCocoa (~> 4.0)
   - RxCocoa-Texture
@@ -55,9 +62,11 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - PINCache
     - PINOperation
     - PINRemoteImage
+    - RxAlamofire
     - RxASControlEvent
     - RxCocoa
     - RxCocoa-Texture
@@ -65,15 +74,17 @@ SPEC REPOS:
     - Texture
 
 SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
+  RxAlamofire: ed65f451f5a9a59419b0b9e705043dc01410edd9
   RxASControlEvent: 459d5c55acf88f0010b4fb8c83a31c1210de7fc7
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxCocoa-Texture: e93fe1e32772d3f744069aeea16abe38f94ec8b2
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   Texture: fc6e0157201f3a6e503d364c147b1872e365cef4
 
-PODFILE CHECKSUM: eed22246b0b68a621ac23bcdf1b4f88c783f19dd
+PODFILE CHECKSUM: cb0f32ce8d199259ca424d248f0733c62feb7adc
 
 COCOAPODS: 1.5.3

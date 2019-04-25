@@ -11,6 +11,7 @@ target 'MOS-iOS' do
     	pod 'RxCocoa',    '~> 4.0'
 	pod 'RxCocoa-Texture'
 	pod 'RxASControlEvent'
+	pod 'RxAlamofire'
 
 
   # Pods for MOS-iOS
