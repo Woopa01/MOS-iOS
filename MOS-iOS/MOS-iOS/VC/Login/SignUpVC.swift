@@ -10,10 +10,11 @@ import Foundation
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
+import RxCocoa_Texture
 
 class SignUpVC : ASViewController<ASDisplayNode> {
     
-    lazy var IdEditNode : ASEditableTextNode  = { () -> ASEditableTextNode in
+    lazy var IdEditNode : ASEditableTextNode  = {
         let node = ASEditableTextNode()
         node.style.preferredSize = CGSize(width: 280.0, height: 15)
         node.attributedPlaceholderText = NSAttributedString(string: "아이디를 입력해주세요.", attributes: [
@@ -23,7 +24,7 @@ class SignUpVC : ASViewController<ASDisplayNode> {
         return node
     }()
     
-    lazy var PassWordEditNode : ASEditableTextNode = { () -> ASEditableTextNode in
+    lazy var PassWordEditNode : ASEditableTextNode = {
         let node = ASEditableTextNode()
         node.style.preferredSize = CGSize(width: 280.0, height: 15)
         node.attributedPlaceholderText = NSAttributedString(string: "비밀번호를 입력해주세요.", attributes: [
@@ -33,7 +34,7 @@ class SignUpVC : ASViewController<ASDisplayNode> {
         return node
     }()
     
-    lazy var UserNameEditNode : ASEditableTextNode = { () -> ASEditableTextNode in
+    lazy var UserNameEditNode : ASEditableTextNode = {
         let node = ASEditableTextNode()
         node.style.preferredSize = CGSize(width: 280.0, height: 15)
         node.attributedPlaceholderText = NSAttributedString(string: "닉네임을 입력해주세요.", attributes: [
@@ -43,21 +44,21 @@ class SignUpVC : ASViewController<ASDisplayNode> {
         return node
     }()
     
-    lazy var underLineNode1 : ASDisplayNode = { () -> ASDisplayNode in
+    lazy var underLineNode1 : ASDisplayNode = {
         let node = ASDisplayNode()
         node.style.preferredSize = CGSize(width: 280.0, height: 1)
         node.backgroundColor = .gray
         return node
     }()
     
-    lazy var underLineNode2 : ASDisplayNode = { () -> ASDisplayNode in
+    lazy var underLineNode2 : ASDisplayNode = {
         let node = ASDisplayNode()
         node.style.preferredSize = CGSize(width: 280.0, height: 1)
         node.backgroundColor = .gray
         return node
     }()
     
-    lazy var underLineNode3 : ASDisplayNode = { () -> ASDisplayNode in
+    lazy var underLineNode3 : ASDisplayNode = {
         let node = ASDisplayNode()
         node.style.preferredSize = CGSize(width: 280.0, height: 1)
         node.backgroundColor = .gray
@@ -120,8 +121,10 @@ extension SignUpVC {
                                  alignItems: .center,
                                  children: [UserNameEditNode, underLineNode3])
     }
-    
-    override func viewDidLoad() {
-        self.navigationController?.isNavigationBarHidden = false
+}
+
+extension SignUpVC {
+    func bindViewModel(){
+        
     }
 }

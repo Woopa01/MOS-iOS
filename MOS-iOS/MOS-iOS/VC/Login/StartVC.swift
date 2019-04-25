@@ -15,7 +15,7 @@ class StartVC : ASViewController<ASDisplayNode> {
     var viewModel = StartViewModel()
     let disposeBag = DisposeBag()
     
-    lazy var titleNode : ASTextNode = { () -> ASTextNode in
+    lazy var titleNode : ASTextNode = {
         let node = ASTextNode()
         node.attributedText = NSAttributedString(string: "MOS", attributes: [
             .font: UIFont(name: "DIN Condensed", size: 55)!,
@@ -23,7 +23,7 @@ class StartVC : ASViewController<ASDisplayNode> {
         return node
     }()
     
-    lazy var desc1Node : ASTextNode = { () -> ASTextNode in
+    lazy var desc1Node : ASTextNode = {
         let node = ASTextNode()
         node.attributedText = NSAttributedString(string: "내가 보고 싶은 것만,", attributes: [
             .font: UIFont.systemFont(ofSize: 20),
@@ -31,7 +31,7 @@ class StartVC : ASViewController<ASDisplayNode> {
         return node
     }()
     
-    lazy var desc2Node : ASTextNode = { () -> ASTextNode in
+    lazy var desc2Node : ASTextNode = {
         let node = ASTextNode()
         node.attributedText = NSAttributedString(string: "나만의 작은 SNS", attributes: [
             .font: UIFont.systemFont(ofSize: 20),
@@ -39,7 +39,7 @@ class StartVC : ASViewController<ASDisplayNode> {
         return node
     }()
     
-    lazy var fbButtonNode : ASButtonNode = { () -> ASButtonNode in
+    lazy var fbButtonNode : ASButtonNode = {
         let node = ASButtonNode()
         node.style.preferredSize = CGSize(width: 280.0, height: 50.0)
         node.cornerRadius = 25.0
@@ -51,7 +51,7 @@ class StartVC : ASViewController<ASDisplayNode> {
         return node
     }()
     
-    lazy var emailButtonNode : ASButtonNode = { () -> ASButtonNode in
+    lazy var emailButtonNode : ASButtonNode = {
         let node = ASButtonNode()
         node.style.preferredSize = CGSize(width: 280.0, height: 50.0)
         node.cornerRadius = 25.0
@@ -95,7 +95,9 @@ class StartVC : ASViewController<ASDisplayNode> {
                                                 strongSelf.signInButtonNode])
             
         }
+        
         bindViewModel()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,13 +120,10 @@ extension StartVC {
         posts.tabBarItem = UITabBarItem(title: "posts", image: nil, selectedImage: nil)
         user.tabBarItem = UITabBarItem(title: "user", image: nil, selectedImage: nil)
         tabBarController.setViewControllers([posts, user], animated: false)
-        
         return tabBarController
     }
     
     func bindViewModel() {
-        viewModel = StartViewModel()
-        
         fbButtonNode.rx
             .tap(to: viewModel.fbLoginDidClicked)
             .disposed(by: disposeBag)
@@ -140,7 +139,7 @@ extension StartVC {
         viewModel.fbResult
             .drive(onNext: { isTrue in
                 if isTrue {
-                    
+                    self.present(self.initTabBarController(), animated: true, completion: nil)
                 }
             }).disposed(by: disposeBag)
         
