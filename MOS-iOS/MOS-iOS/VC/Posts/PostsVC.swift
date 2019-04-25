@@ -11,9 +11,9 @@ import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 
-class PostsVC : ASViewController<ASScrollNode> {
+class PostsVC : ASViewController<ASTableNode> {
     
-    lazy var appNameNode : ASTextNode = { () -> ASTextNode in
+    lazy var appNameNode : ASTextNode = {
         let node = ASTextNode()
         node.attributedText = NSAttributedString(string: "MOS", attributes: [
             .font: UIFont(name: "DIN Condensed", size: 30)!,
@@ -23,27 +23,35 @@ class PostsVC : ASViewController<ASScrollNode> {
     }()
     
     init() {
-        super.init(node: ASScrollNode())
-        node.scrollableDirections = .down
-        node.automaticallyManagesSubnodes = true
-        node.automaticallyManagesContentSize = true
-        //        node.layoutSpecBlock = { [weak self] node, constrainedSize in
-        //            let strongSelf = self; else { return ASLayoutSpec() }
-        //            return ASInsetLayoutSpec(insets: .init(top: 0.0 , left: 0.0 , bottom: 0.0, right: 0.0), child: strongSelf.appNameNode )
-        //        }
+        let tableNode = ASTableNode(style: .plain)
+        tableNode.backgroundColor = .white
+        tableNode.automaticallyManagesSubnodes = true
+        super.init(node: tableNode)
         
-        node.onDidLoad { _ in
+        
+        
+        node.onDidLoad { node in
+            guard let strongNode = node as? ASTableNode else { return }
+            strongNode.view.separatorStyle = .singleLine
+            
             let searchBarButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(PostsVC.goSearch))
             let writeBarButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(PostsVC.goWrite))
             let filterBarButton = UIBarButtonItem(image: UIImage(named: "filterIcon.png"), style: .plain, target: self, action: #selector(PostsVC.goFilter))
             
             self.navigationItem.rightBarButtonItems = [searchBarButton,writeBarButton,filterBarButton]
         }
+        
+//        self.node.dataSource = self
+//        self.node.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension PostsVC : ASTableDataSource, ASTableDelegate {
+    
 }
 
 extension PostsVC {
