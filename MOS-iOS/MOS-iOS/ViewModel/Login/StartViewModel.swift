@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class StartViewModel {
+class StartViewModel {
     
     //Input
     let fbLoginDidClicked = PublishRelay<Void>()
@@ -21,28 +21,6 @@ final class StartViewModel {
     var fbResult : Driver<Bool>
     var emailSignUpResult : Driver<Bool>
     var emailSignInResult : Driver<Bool>
-    
-    
-    //    func transform(input: StartViewModel.Input) -> StartViewModel.Output {
-    //        let fbResult = input.fbLoginDidClicked
-    //            .asObservable()
-    //            .map { return true }
-    //            .asDriver(onErrorJustReturn: false)
-    //
-    //        let emailLoginResult = input.emailLoginDidClicked
-    //            .asObservable()
-    //            .map { return true }
-    //            .asDriver(onErrorJustReturn: false)
-    //
-    //        let emailSignInResult = input.emailSignInDidCilcked
-    //            .asObservable()
-    //            .map { return true }
-    //            .asDriver(onErrorJustReturn: false)
-    //
-    //        return Output(fbResult: fbResult,
-    //                      emailLoginResult: emailLoginResult,
-    //                      emailSignInResult: emailSignInResult)
-    //    }
     
     init() {
         self.fbResult = fbLoginDidClicked
@@ -60,7 +38,6 @@ final class StartViewModel {
             .map { return true }
             .asDriver(onErrorJustReturn: false)
     }
-    
     
     
 }
