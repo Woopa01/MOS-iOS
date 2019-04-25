@@ -9,6 +9,6 @@
 import Foundation
 import UIKit
 
-protocol APIProtocol {
-    func getColor() -> UIColor
+protocol API {
+    func getPath() -> String
 }
