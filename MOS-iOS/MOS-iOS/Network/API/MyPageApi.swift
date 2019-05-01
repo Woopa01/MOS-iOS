@@ -8,9 +8,14 @@
 
 import Foundation
 enum MyPageApi : API{
-    case signup, login
+    case signup, login, getprofile, getposts
 
     func getPath() -> String {
-        <#code#>
+        switch self {
+        case .signup: return "signup"
+        case .login: return "login"
+        case .getprofile: return "getprofile"
+        case .getposts: return "getposts"
+        }
     }
 }
