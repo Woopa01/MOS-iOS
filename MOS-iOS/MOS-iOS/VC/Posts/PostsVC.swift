@@ -50,8 +50,18 @@ class PostsVC : ASViewController<ASTableNode> {
     }
 }
 
-extension PostsVC : ASTableDataSource, ASTableDelegate {
+extension PostsVC : ASTableDelegate, ASTableDataSource{
+    func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
+        return{
+            let cell = PostsCell()
+            cell.authorNameNode.attributedText = NSAttributedString(string: "hello")
+            return cell
+        }
+    }
     
+    func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
 }
 
 extension PostsVC {
