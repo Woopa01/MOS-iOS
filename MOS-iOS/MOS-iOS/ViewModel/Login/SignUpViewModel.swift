@@ -7,35 +7,45 @@
 //
 
 import Foundation
+import Alamofire
 import RxSwift
 import RxCocoa
 
-enum SignUpStatus {
-    case success, failure
+class SignUpViewModel {
+    //Input
+    let idInput = PublishRelay<String?>()
+    let passwordInput = PublishRelay<String?>()
+    let usernameInput = PublishRelay<String?>()
+    let signUpDidClicked = PublishRelay<Void?>()
+    
+    //Output
+    let status: Driver<Bool>
+    
+    struct Dependencies {
+        let api: Api
+    }
+    
+    private let dependencies = Dependencies(api: Api())
+    
+    init() {
+        let InputsValid = PublishRelay.combineLatest(idInput,passwordInput,usernameInput) { ($0, $1, $2) }
+            .asObservable()
+        
+        self.status = signUpDidClicked.asObservable()
+            .withLatestFrom(InputsValid)
+            .flatMapLatest { pair in
+                let (id, password, username) = pair
+                let params: Parameters = ["id": id!,
+                              "password": password!,
+                              "name": username!,
+                              "imageurl": "",
+                              "category": [""]]
+                
+                self.dependencies.api.SignUpRequest(params: params)
+            }
+            .map { if $0 == StatusCode.success { return true }
+                   else { return false}
+            }
+            .asDriver(onErrorJustReturn: false)
+    }
 }
-
-//class SignUpViewModel {
-//    //Input
-//    let idInput = PublishRelay<String?>()
-//    let passwordInput = PublishRelay<String?>()
-//    let usernameInput = PublishRelay<String?>()
-//    let signUpDidClicked = PublishRelay<Void?>()
-//    
-//    //Output
-//    let status: Driver<SignUpStatus>
-//    
-//    init() {
-//        let InputsValid = PublishRelay.combineLatest(idInput,passwordInput,usernameInput) { ($0, $1, $2) }
-//            .asObservable()
-//        
-//        self.status = signUpDidClicked
-//            .asObservable()
-//            .withLatestFrom(InputsValid)
-//            .flatMapLatest({ pair -> Observable<Bool> in
-//                let (id, password, username) = pair
-//                return Observable<Bool>(true)
-//            })
-//            .map { $0 ? SignUpStatus.success : SignUpStatus.failure }
-//            .asDriver(onErrorJustReturn: .failure)
-//    }
-//}
