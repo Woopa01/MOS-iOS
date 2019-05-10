@@ -6,13 +6,22 @@
 //  Copyright © 2019 조우진. All rights reserved.
 //
 
-import Foundation
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 import RxCocoa_Texture
 
 class SignUpVC : ASViewController<ASDisplayNode> {
+    
+    lazy var profileImageNode: ASImageNode = {
+        let node = ASImageNode()
+        node.style.preferredSize = CGSize(width: 70.0, height: 70.0)
+        node.cornerRadius = 35.0
+        node.borderWidth = 2
+        node.borderColor = UIColor.black.cgColor
+        node.image = UIImage(named: "user")
+        return node
+    }()
     
     lazy var IdEditNode : ASEditableTextNode  = {
         let node = ASEditableTextNode()
@@ -73,17 +82,19 @@ class SignUpVC : ASViewController<ASDisplayNode> {
         
         node.layoutSpecBlock = { [weak self] (_,_) in
             guard let strongSelf = self else { return ASLayoutSpec() }
+            strongSelf.profileImageNode.style.spacingAfter = 30.0
             
             let idStackLayout = strongSelf.IdStackinit()
             let passwordStackLayout = strongSelf.PassWordStackinit()
             let usernameStackLayout = strongSelf.UserNameStackinit()
             
-            let stackLayout = ASStackLayoutSpec(direction: .vertical, spacing: 70.0, justifyContent: .spaceBetween, alignItems: .center , children: [
+            let stackLayout = ASStackLayoutSpec(direction: .vertical, spacing: 50.0, justifyContent: .spaceBetween, alignItems: .center , children: [
+                strongSelf.profileImageNode,
                 idStackLayout,
                 passwordStackLayout,
                 usernameStackLayout])
             
-            return ASInsetLayoutSpec(insets: .init(top: .infinity, left: .infinity, bottom: .infinity, right: .infinity), child: stackLayout)
+            return ASInsetLayoutSpec(insets: .init(top: .infinity, left: .infinity, bottom: 300.0, right: .infinity), child: stackLayout)
         }
         
         node.onDidLoad { _ in
