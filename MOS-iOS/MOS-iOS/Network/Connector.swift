@@ -17,7 +17,7 @@ protocol ConnectorType {
 }
 
 class Connector : ConnectorType {
-    let baseUrl = ""
+    let baseUrl = "http://localhost:8080/api/"
     
     func get(path: String, params: Parameters, header: Header) -> Observable<(HTTPURLResponse, Data)> {
         return requestData(.get,
@@ -42,7 +42,7 @@ enum Header {
     func getHeader() -> [String : String]? {
         switch self {
         case .Authorization:
-            return ["Authorization" : UserDefaults.standard.value(forKey: "Token") as? String ?? "",
+            return ["token" : UserDefaults.standard.value(forKey: "Token") as? String ?? "",
                     "Content-Type" : "application/json"]
         case .Empty :
             return ["Content-Type" : "application/json"]
