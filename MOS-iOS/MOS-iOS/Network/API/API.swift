@@ -20,10 +20,11 @@ class Api: APIProvider {
     private let connector = Connector()
 
     func SignUpRequest(params: Parameters) -> Observable<StatusCode> {
-        return connector.get(path: MyPageApi.signup.getPath(),
+        return connector.post(path: MyPageApi.signup.getPath(),
                              params: params,
                              header: Header.Empty)
             .map{ res, _ -> StatusCode in
+                print(res)
                 if res.statusCode == 200 { return StatusCode.success }
                 else { return StatusCode.failure }
         }
