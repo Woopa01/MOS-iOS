@@ -12,6 +12,8 @@ import RxCocoa
 import RxCocoa_Texture
 
 class SignUpVC : ASViewController<ASDisplayNode> {
+    var viewModel: SignUpViewModel!
+    let disposeBag = DisposeBag()
     
     lazy var profileImageNode: ASImageNode = {
         let node = ASImageNode()
@@ -23,35 +25,11 @@ class SignUpVC : ASViewController<ASDisplayNode> {
         return node
     }()
     
-    lazy var IdEditNode : ASEditableTextNode  = {
-        let node = ASEditableTextNode()
-        node.style.preferredSize = CGSize(width: 280.0, height: 15)
-        node.attributedPlaceholderText = NSAttributedString(string: "아이디를 입력해주세요.", attributes: [
-            .font : UIFont.systemFont(ofSize: 15),
-            .foregroundColor: UIColor.gray])
-//        node.style.flexGrow = 1.0
-        return node
-    }()
+    lazy var IdEditNode = IdInputNode()
     
-    lazy var PassWordEditNode : ASEditableTextNode = {
-        let node = ASEditableTextNode()
-        node.style.preferredSize = CGSize(width: 280.0, height: 15)
-        node.attributedPlaceholderText = NSAttributedString(string: "비밀번호를 입력해주세요.", attributes: [
-            .font: UIFont.systemFont(ofSize: 15),
-            .foregroundColor: UIColor.gray])
-//        node.style.flexGrow = 1.0
-        return node
-    }()
+    lazy var PassWordEditNode = PasswordInputNode()
     
-    lazy var UserNameEditNode : ASEditableTextNode = {
-        let node = ASEditableTextNode()
-        node.style.preferredSize = CGSize(width: 280.0, height: 15)
-        node.attributedPlaceholderText = NSAttributedString(string: "닉네임을 입력해주세요.", attributes: [
-            .font: UIFont.systemFont(ofSize: 15),
-            .foregroundColor: UIColor.gray])
-//        node.style.flexGrow = 1.0
-        return node
-    }()
+    lazy var UserNameEditNode = UserNameInputNode()
     
     lazy var underLineNode1 : ASDisplayNode = {
         let node = ASDisplayNode()
@@ -74,6 +52,15 @@ class SignUpVC : ASViewController<ASDisplayNode> {
         return node
     }()
     
+    lazy var signUpBtnNode: ASButtonNode = {
+        let node = ASButtonNode()
+        node.setTitle("회원가입", with: UIFont.systemFont(ofSize: 20), with: .white, for: .normal)
+        node.style.preferredSize = CGSize(width: 280.0, height: 50)
+        node.cornerRadius = 25.0
+        node.backgroundColor = Color.RED.getColor()
+        return node
+    }()
+    
     
     init() {
         super.init(node: ASDisplayNode())
@@ -83,23 +70,27 @@ class SignUpVC : ASViewController<ASDisplayNode> {
         node.layoutSpecBlock = { [weak self] (_,_) in
             guard let strongSelf = self else { return ASLayoutSpec() }
             strongSelf.profileImageNode.style.spacingAfter = 30.0
+            strongSelf.signUpBtnNode.style.spacingAfter = 50.0
             
             let idStackLayout = strongSelf.IdStackinit()
             let passwordStackLayout = strongSelf.PassWordStackinit()
             let usernameStackLayout = strongSelf.UserNameStackinit()
             
-            let stackLayout = ASStackLayoutSpec(direction: .vertical, spacing: 50.0, justifyContent: .spaceBetween, alignItems: .center , children: [
+            let stackLayout = ASStackLayoutSpec(direction: .vertical, spacing: 50.0, justifyContent: .center, alignItems: .center , children: [
                 strongSelf.profileImageNode,
                 idStackLayout,
                 passwordStackLayout,
-                usernameStackLayout])
+                usernameStackLayout,
+                strongSelf.signUpBtnNode])
             
-            return ASInsetLayoutSpec(insets: .init(top: .infinity, left: .infinity, bottom: 300.0, right: .infinity), child: stackLayout)
+            return ASInsetLayoutSpec(insets: .init(top: .infinity, left: .infinity, bottom: .infinity, right: .infinity), child: stackLayout)
         }
         
         node.onDidLoad { _ in
             self.navigationController?.isNavigationBarHidden = false
         }
+        
+        bindViewModel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -136,6 +127,96 @@ extension SignUpVC {
 
 extension SignUpVC {
     func bindViewModel(){
+        viewModel = SignUpViewModel()
         
+        IdEditNode.idField?.rx.text
+            .orEmpty
+            .bind(to: viewModel.idInput)
+            .disposed(by: disposeBag)
+        
+        PassWordEditNode.passwordField?.rx.text
+            .orEmpty
+            .bind(to: viewModel.passwordInput)
+            .disposed(by: disposeBag)
+        
+        UserNameEditNode.userNameField?.rx.text
+            .orEmpty
+            .bind(to: viewModel.usernameInput)
+            .disposed(by: disposeBag)
+        
+        signUpBtnNode.rx
+            .tap(to: viewModel.signUpDidClicked)
+            .disposed(by: disposeBag)
+        
+        viewModel.status.asObservable()
+            .subscribe(onNext: { [weak self] isSuccess in
+                guard let `self` = self else { return }
+                if isSuccess {
+                    let alert = UIAlertController(title: "회원가입", message: "성공적으로 회원가입 되었습니다.", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+class IdInputNode: ASDisplayNode {
+    
+    var idField: UITextField? {
+        return self.view as? UITextField
+    }
+    
+    override init() {
+        super.init()
+        self.setViewBlock { () -> UIView in
+            let field = UITextField()
+            field.attributedPlaceholder = NSAttributedString(string: "아이디를 입력해주세요.",attributes:
+                [.font: UIFont.systemFont(ofSize: 15),
+                 .foregroundColor: UIColor.gray])
+            return field
+        }
+        self.style.preferredSize = CGSize(width: 280.0, height: 15.0)
+    }
+}
+
+class PasswordInputNode: ASDisplayNode {
+    
+    var passwordField: UITextField? {
+        return self.view as? UITextField
+    }
+    
+    override init() {
+        super.init()
+        self.setViewBlock { () -> UIView in
+            let field = UITextField()
+            field.attributedPlaceholder = NSAttributedString(string: "비밀번호를 입력해주세요.",attributes:
+                [.font: UIFont.systemFont(ofSize: 15),
+                 .foregroundColor: UIColor.gray])
+            return field
+        }
+        self.style.preferredSize = CGSize(width: 280.0, height: 15.0)
+    }
+}
+
+class UserNameInputNode: ASDisplayNode {
+    
+    var userNameField: UITextField? {
+        return self.view as? UITextField
+    }
+    
+    override init() {
+        super.init()
+        self.setViewBlock { () -> UIView in
+            let field = UITextField()
+            field.attributedPlaceholder = NSAttributedString(string: "이름을 입력해주세요.",attributes:
+                [.font: UIFont.systemFont(ofSize: 15),
+                 .foregroundColor: UIColor.gray])
+            return field
+        }
+        self.style.preferredSize = CGSize(width: 280.0, height: 15.0)
     }
 }
