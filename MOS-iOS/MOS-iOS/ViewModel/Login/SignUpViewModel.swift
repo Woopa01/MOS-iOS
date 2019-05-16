@@ -13,13 +13,15 @@ import RxCocoa
 
 class SignUpViewModel {
     //Input
-    let idInput = PublishRelay<String?>()
-    let passwordInput = PublishRelay<String?>()
-    let usernameInput = PublishRelay<String?>()
-    let signUpDidClicked = PublishRelay<Void?>()
+    let idInput = BehaviorRelay<String>(value: "")
+    let passwordInput = BehaviorRelay<String>(value: "")
+    let usernameInput = BehaviorRelay<String>(value: "")
+    let signUpDidClicked = PublishRelay<Void>()
     
     //Output
-    let status: Driver<Bool>
+    let status = BehaviorRelay<Bool>(value: false)
+    
+    let disposeBag = DisposeBag()
     
     struct Dependencies {
         let api: Api
@@ -31,21 +33,19 @@ class SignUpViewModel {
         let InputsValid = PublishRelay.combineLatest(idInput,passwordInput,usernameInput) { ($0, $1, $2) }
             .asObservable()
         
-        self.status = signUpDidClicked.asObservable()
+        signUpDidClicked.asObservable()
             .withLatestFrom(InputsValid)
-            .flatMapLatest { pair in
+            .flatMapLatest { pair -> Observable<StatusCode> in
                 let (id, password, username) = pair
-                let params: Parameters = ["id": id!,
-                              "password": password!,
-                              "name": username!,
-                              "imageurl": "",
-                              "category": [""]]
+                let params: Parameters = ["id": id,
+                                          "password": password,
+                                          "name": username]
                 
-                self.dependencies.api.SignUpRequest(params: params)
+                return self.dependencies.api.SignUpRequest(params: params)
             }
             .map { if $0 == StatusCode.success { return true }
                    else { return false}
-            }
-            .asDriver(onErrorJustReturn: false)
+            }.bind(to: status)
+        .disposed(by: disposeBag)
     }
 }
