@@ -9,7 +9,7 @@
 import Foundation
 import AsyncDisplayKit
 
-class EmailSignInVC : ASViewController<ASDisplayNode>{
+class SignInVC : ASViewController<ASDisplayNode>{
     
     lazy var titleNode: ASTextNode = { () -> ASTextNode in
         let node = ASTextNode()
@@ -98,7 +98,7 @@ class EmailSignInVC : ASViewController<ASDisplayNode>{
     }
 }
 
-extension EmailSignInVC {
+extension SignInVC {
     func idStackInit() -> ASLayoutSpec {
         return ASStackLayoutSpec(direction: .vertical,
                                  spacing: 5.0,

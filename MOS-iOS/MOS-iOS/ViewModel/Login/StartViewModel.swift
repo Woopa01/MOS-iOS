@@ -13,27 +13,21 @@ import RxCocoa
 class StartViewModel {
     
     //Input
-    let fbLoginDidClicked = PublishRelay<Void>()
-    let emailSignUpDidClicked = PublishRelay<Void>()
-    let emailSignInDidCilcked = PublishRelay<Void>()
+    let SignUpDidClicked = PublishRelay<Void>()
+    let SignInDidCilcked = PublishRelay<Void>()
     
     //Output
-    var fbResult : Driver<Bool>
-    var emailSignUpResult : Driver<Bool>
-    var emailSignInResult : Driver<Bool>
+    var SignUpResult : Driver<Bool>
+    var SignInResult : Driver<Bool>
     
     init() {
-        self.fbResult = fbLoginDidClicked
+        
+        self.SignUpResult = SignUpDidClicked
             .asObservable()
             .map { return true }
             .asDriver(onErrorJustReturn: false)
         
-        self.emailSignUpResult = emailSignUpDidClicked
-            .asObservable()
-            .map { return true }
-            .asDriver(onErrorJustReturn: false)
-        
-        self.emailSignInResult = emailSignInDidCilcked
+        self.SignInResult = SignInDidCilcked
             .asObservable()
             .map { return true }
             .asDriver(onErrorJustReturn: false)
