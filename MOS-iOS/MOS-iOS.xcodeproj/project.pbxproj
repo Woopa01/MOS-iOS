@@ -24,6 +24,10 @@
 		6838C9B12249F33300FB802A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6838C9AF2249F33300FB802A /* LaunchScreen.storyboard */; };
 		6838C9BC2249F33300FB802A /* MOS_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6838C9BB2249F33300FB802A /* MOS_iOSTests.swift */; };
 		6838C9C72249F33300FB802A /* MOS_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6838C9C62249F33300FB802A /* MOS_iOSUITests.swift */; };
+		6839504E228E4DB100F40BED /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839504D228E4DB100F40BED /* PostModel.swift */; };
+		68395051228E4F0C00F40BED /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68395050228E4F0C00F40BED /* CommentModel.swift */; };
+		68395053228E500A00F40BED /* ApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68395052228E500A00F40BED /* ApiResponses.swift */; };
+		68395055228E804F00F40BED /* PostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68395054228E804F00F40BED /* PostCellViewModel.swift */; };
 		6839D8B7228D2161002C1135 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839D8B6228D2161002C1135 /* TokenModel.swift */; };
 		6839D8BA228D32A4002C1135 /* LoginNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839D8B9228D32A4002C1135 /* LoginNodes.swift */; };
 		6839DA43227707BC00AA12D6 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839DA42227707BC00AA12D6 /* PostsViewModel.swift */; };
@@ -80,6 +84,10 @@
 		6838C9C22249F33300FB802A /* MOS-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MOS-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6838C9C62249F33300FB802A /* MOS_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOS_iOSUITests.swift; sourceTree = "<group>"; };
 		6838C9C82249F33300FB802A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6839504D228E4DB100F40BED /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		68395050228E4F0C00F40BED /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
+		68395052228E500A00F40BED /* ApiResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponses.swift; sourceTree = "<group>"; };
+		68395054228E804F00F40BED /* PostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellViewModel.swift; sourceTree = "<group>"; };
 		6839D8B6228D2161002C1135 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		6839D8B9228D32A4002C1135 /* LoginNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNodes.swift; sourceTree = "<group>"; };
 		6839DA42227707BC00AA12D6 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
@@ -170,6 +178,7 @@
 				680B10CC226D54AA00166458 /* Path */,
 				683D76D2226E8A7300ED1248 /* Connector.swift */,
 				6839DA442277090C00AA12D6 /* Api.swift */,
+				68395052228E500A00F40BED /* ApiResponses.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -266,6 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				6839D8B6228D2161002C1135 /* TokenModel.swift */,
+				6839504D228E4DB100F40BED /* PostModel.swift */,
+				68395050228E4F0C00F40BED /* CommentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				6839DA42227707BC00AA12D6 /* PostsViewModel.swift */,
+				68395054228E804F00F40BED /* PostCellViewModel.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -577,10 +589,13 @@
 				68236B54226707F8007BB672 /* LoginViewModel.swift in Sources */,
 				6838C9AC2249F33100FB802A /* MOS_iOS.xcdatamodeld in Sources */,
 				683D76D3226E8A7300ED1248 /* Connector.swift in Sources */,
+				68395053228E500A00F40BED /* ApiResponses.swift in Sources */,
 				68236B50226703BA007BB672 /* StartViewModel.swift in Sources */,
+				68395051228E4F0C00F40BED /* CommentModel.swift in Sources */,
 				6801599E2265B61C00C003FA /* Base.swift in Sources */,
 				68386BC92250F422007BEB71 /* Colors.swift in Sources */,
 				68386BCC2250F8D5007BEB71 /* StartVC.swift in Sources */,
+				6839504E228E4DB100F40BED /* PostModel.swift in Sources */,
 				68E0952B22519A4A004E8ADC /* MyPageVC.swift in Sources */,
 				680B10CE226D54C400166458 /* APIProtocol.swift in Sources */,
 				6838C9A42249F33100FB802A /* AppDelegate.swift in Sources */,
@@ -588,6 +603,7 @@
 				68BF6D9522714090007C6DB0 /* PostsApi.swift in Sources */,
 				6839DA43227707BC00AA12D6 /* PostsViewModel.swift in Sources */,
 				68BF6D9722714191007C6DB0 /* MyPageApi.swift in Sources */,
+				68395055228E804F00F40BED /* PostCellViewModel.swift in Sources */,
 				6839D8BA228D32A4002C1135 /* LoginNodes.swift in Sources */,
 				68420A272275E225001AD39E /* PostsCell.swift in Sources */,
 				68E0952F22519A8D004E8ADC /* PostsVC.swift in Sources */,
