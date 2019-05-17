@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 import AsyncDisplayKit
 
 extension ASViewController {
@@ -16,6 +18,7 @@ extension ASViewController {
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
     }
+    
     
     @objc func showToast(msg: String, fun: (() -> Void)? = nil){
         let toast = UILabel(frame: CGRect(x: 32, y: 550, width: view.frame.size.width - 64, height: 42))
@@ -34,5 +37,11 @@ extension ASViewController {
             fun?()
         })
     }
-    
+}
+
+extension Reactive where Base: ASViewController<ASTableNode> {
+    var viewWillAppear: ControlEvent<Void> {
+        let source = self.methodInvoked(#selector(Base.viewWillAppear(_:))).map { _ in }
+        return ControlEvent(events: source)
+    }
 }
