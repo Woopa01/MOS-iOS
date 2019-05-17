@@ -12,14 +12,14 @@ import RxSwift
 import RxCocoa
 
 protocol ConnectorType {
-    func get(path: String, params: Parameters, header : Header) -> Observable<(HTTPURLResponse,Data)>
+    func get(path: String, params: Parameters?, header : Header) -> Observable<(HTTPURLResponse,Data)>
     func post(path: String, params: Parameters, header : Header) -> Observable<(HTTPURLResponse,Data)>
 }
 
 class Connector : ConnectorType {
     let baseUrl = "http://localhost:8080/api/"
     
-    func get(path: String, params: Parameters, header: Header) -> Observable<(HTTPURLResponse, Data)> {
+    func get(path: String, params: Parameters?, header: Header) -> Observable<(HTTPURLResponse, Data)> {
         return requestData(.get,
                            baseUrl + path,
                            parameters: params,
@@ -42,7 +42,7 @@ enum Header {
     func getHeader() -> [String : String]? {
         switch self {
         case .Authorization:
-            return ["token" : UserDefaults.standard.value(forKey: "Token") as? String ?? "",
+            return ["token" : UserDefaults.standard.value(forKey: "token") as? String ?? "",
                     "Content-Type" : "application/json"]
         case .Empty :
             return ["Content-Type" : "application/json"]
