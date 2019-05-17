@@ -106,16 +106,6 @@ class StartVC : ASViewController<ASDisplayNode> {
 }
 
 extension StartVC {
-    func initTabBarController() -> UITabBarController{
-        let tabBarController = UITabBarController()
-        let posts = UINavigationController(rootViewController: PostsVC())
-        let user = UINavigationController(rootViewController: MyPageVC())
-        posts.tabBarItem = UITabBarItem(title: "posts", image: nil, selectedImage: nil)
-        user.tabBarItem = UITabBarItem(title: "user", image: nil, selectedImage: nil)
-        tabBarController.setViewControllers([posts, user], animated: false)
-        return tabBarController
-    }
-    
     func bindViewModel() {
         SignInButtonNode.rx
             .tap(to: viewModel.SignInDidCilcked)

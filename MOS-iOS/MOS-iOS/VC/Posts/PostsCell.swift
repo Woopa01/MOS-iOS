@@ -25,6 +25,7 @@ class PostsCell : ASCellNode {
         node.attributedText = NSAttributedString(string: "author", attributes:
             defaultTextAttribute)
         node.maximumNumberOfLines = 1
+        node.style.flexShrink = 1.0
         return node
     }()
     
@@ -33,6 +34,7 @@ class PostsCell : ASCellNode {
         node.attributedText = NSAttributedString(string: "date", attributes:
             defaultTextAttribute)
         node.maximumNumberOfLines = 1
+        node.style.flexShrink = 1.0
         return node
     }()
     
@@ -50,6 +52,8 @@ class PostsCell : ASCellNode {
         node.attributedText = NSAttributedString(string: "content", attributes:
             [.foregroundColor: UIColor.black,
              .font: UIFont.systemFont(ofSize: 15, weight: .bold)])
+        node.style.flexGrow = 1.0
+        node.style.flexShrink = 1.0
         return node
     }()
     
@@ -69,6 +73,8 @@ class PostsCell : ASCellNode {
     lazy var likeTotalNode: ASTextNode = {
         let node = ASTextNode()
         node.attributedText = NSAttributedString(string: "0", attributes: totalTextAttribute)
+        node.style.flexShrink = 1.0
+        node.maximumNumberOfLines = 1
         return node
     }()
     
@@ -81,6 +87,8 @@ class PostsCell : ASCellNode {
     lazy var commentTotalNode: ASTextNode = {
         let node = ASTextNode()
         node.attributedText = NSAttributedString(string: "0", attributes: totalTextAttribute)
+        node.style.flexShrink = 1.0
+        node.maximumNumberOfLines = 1
         return node
     }()
     

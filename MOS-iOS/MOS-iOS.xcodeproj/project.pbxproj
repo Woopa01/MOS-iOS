@@ -14,7 +14,7 @@
 		680B10CE226D54C400166458 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B10CD226D54C400166458 /* APIProtocol.swift */; };
 		68236B4C2266F9D6007BB672 /* filterIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68236B4B2266F9D6007BB672 /* filterIcon.png */; };
 		68236B50226703BA007BB672 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68236B4F226703BA007BB672 /* StartViewModel.swift */; };
-		68236B54226707F8007BB672 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68236B53226707F8007BB672 /* SignUpViewModel.swift */; };
+		68236B54226707F8007BB672 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68236B53226707F8007BB672 /* LoginViewModel.swift */; };
 		68386BC92250F422007BEB71 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68386BC82250F422007BEB71 /* Colors.swift */; };
 		68386BCC2250F8D5007BEB71 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68386BCB2250F8D5007BEB71 /* StartVC.swift */; };
 		68386BCE2250F917007BEB71 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68386BCD2250F917007BEB71 /* SignUpVC.swift */; };
@@ -24,6 +24,8 @@
 		6838C9B12249F33300FB802A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6838C9AF2249F33300FB802A /* LaunchScreen.storyboard */; };
 		6838C9BC2249F33300FB802A /* MOS_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6838C9BB2249F33300FB802A /* MOS_iOSTests.swift */; };
 		6838C9C72249F33300FB802A /* MOS_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6838C9C62249F33300FB802A /* MOS_iOSUITests.swift */; };
+		6839D8B7228D2161002C1135 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839D8B6228D2161002C1135 /* TokenModel.swift */; };
+		6839D8BA228D32A4002C1135 /* LoginNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839D8B9228D32A4002C1135 /* LoginNodes.swift */; };
 		6839DA43227707BC00AA12D6 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839DA42227707BC00AA12D6 /* PostsViewModel.swift */; };
 		6839DA452277090C00AA12D6 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839DA442277090C00AA12D6 /* Api.swift */; };
 		6839DA47227714FC00AA12D6 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 6839DA46227714FC00AA12D6 /* user.png */; };
@@ -62,7 +64,7 @@
 		680B10CD226D54C400166458 /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		68236B4B2266F9D6007BB672 /* filterIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filterIcon.png; sourceTree = "<group>"; };
 		68236B4F226703BA007BB672 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
-		68236B53226707F8007BB672 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		68236B53226707F8007BB672 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		68386BC82250F422007BEB71 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		68386BCB2250F8D5007BEB71 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		68386BCD2250F917007BEB71 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -78,6 +80,8 @@
 		6838C9C22249F33300FB802A /* MOS-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MOS-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6838C9C62249F33300FB802A /* MOS_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOS_iOSUITests.swift; sourceTree = "<group>"; };
 		6838C9C82249F33300FB802A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6839D8B6228D2161002C1135 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
+		6839D8B9228D32A4002C1135 /* LoginNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNodes.swift; sourceTree = "<group>"; };
 		6839DA42227707BC00AA12D6 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		6839DA442277090C00AA12D6 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		6839DA46227714FC00AA12D6 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
@@ -123,21 +127,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		680B10CC226D54AA00166458 /* API */ = {
+		680B10CC226D54AA00166458 /* Path */ = {
 			isa = PBXGroup;
 			children = (
 				680B10CD226D54C400166458 /* APIProtocol.swift */,
 				68BF6D9422714090007C6DB0 /* PostsApi.swift */,
 				68BF6D9622714191007C6DB0 /* MyPageApi.swift */,
-				6839DA442277090C00AA12D6 /* Api.swift */,
 			);
-			path = API;
+			path = Path;
 			sourceTree = "<group>";
 		};
 		68236B4D22670378007BB672 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				6839DA42227707BC00AA12D6 /* PostsViewModel.swift */,
+				6839D8BB228D3654002C1135 /* Posts */,
 				68236B4E226703A9007BB672 /* Login */,
 			);
 			path = ViewModel;
@@ -147,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				68236B4F226703BA007BB672 /* StartViewModel.swift */,
-				68236B53226707F8007BB672 /* SignUpViewModel.swift */,
+				68236B53226707F8007BB672 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -164,8 +167,9 @@
 		68386BC42250F2E7007BEB71 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				680B10CC226D54AA00166458 /* API */,
+				680B10CC226D54AA00166458 /* Path */,
 				683D76D2226E8A7300ED1248 /* Connector.swift */,
+				6839DA442277090C00AA12D6 /* Api.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -214,6 +218,8 @@
 		6838C9A22249F33100FB802A /* MOS-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				6839D8B8228D3296002C1135 /* Views */,
+				6839D8B5228D2153002C1135 /* Model */,
 				68236B4D22670378007BB672 /* ViewModel */,
 				68386BC52250F302007BEB71 /* Util */,
 				68386BC42250F2E7007BEB71 /* Network */,
@@ -254,6 +260,30 @@
 				68E0952922519A27004E8ADC /* MyPage */,
 			);
 			path = VC;
+			sourceTree = "<group>";
+		};
+		6839D8B5228D2153002C1135 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6839D8B6228D2161002C1135 /* TokenModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6839D8B8228D3296002C1135 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6839D8B9228D32A4002C1135 /* LoginNodes.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6839D8BB228D3654002C1135 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				6839DA42227707BC00AA12D6 /* PostsViewModel.swift */,
+			);
+			path = Posts;
 			sourceTree = "<group>";
 		};
 		68E0952722519A1C004E8ADC /* Posts */ = {
@@ -541,9 +571,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6839D8B7228D2161002C1135 /* TokenModel.swift in Sources */,
 				68386BCE2250F917007BEB71 /* SignUpVC.swift in Sources */,
 				6839DA452277090C00AA12D6 /* Api.swift in Sources */,
-				68236B54226707F8007BB672 /* SignUpViewModel.swift in Sources */,
+				68236B54226707F8007BB672 /* LoginViewModel.swift in Sources */,
 				6838C9AC2249F33100FB802A /* MOS_iOS.xcdatamodeld in Sources */,
 				683D76D3226E8A7300ED1248 /* Connector.swift in Sources */,
 				68236B50226703BA007BB672 /* StartViewModel.swift in Sources */,
@@ -557,6 +588,7 @@
 				68BF6D9522714090007C6DB0 /* PostsApi.swift in Sources */,
 				6839DA43227707BC00AA12D6 /* PostsViewModel.swift in Sources */,
 				68BF6D9722714191007C6DB0 /* MyPageApi.swift in Sources */,
+				6839D8BA228D32A4002C1135 /* LoginNodes.swift in Sources */,
 				68420A272275E225001AD39E /* PostsCell.swift in Sources */,
 				68E0952F22519A8D004E8ADC /* PostsVC.swift in Sources */,
 			);
