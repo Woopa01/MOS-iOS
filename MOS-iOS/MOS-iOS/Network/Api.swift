@@ -15,8 +15,12 @@ protocol Login {
     func SignInRequest(params: Parameters) -> Observable<(StatusCode,String?)>
 }
 
+protocol Posts {
+    func PostsList() -> Observable<[PostModel]>
+}
 
-protocol APIProvider: Login {
+
+protocol APIProvider: Login, Posts {
     func statusCode(code: Int) -> StatusCode
 }
 
@@ -29,11 +33,11 @@ class Api: APIProvider {
         default: return StatusCode.failure
         }
     }
-
+    
     func SignUpRequest(params: Parameters) -> Observable<StatusCode> {
         return connector.post(path: MyPageApi.signup.getPath(),
-                             params: params,
-                             header: Header.Empty)
+                              params: params,
+                              header: Header.Empty)
             .map{ res, _ -> StatusCode in
                 print(res)
                 if res.statusCode == 200 { return StatusCode.success }
@@ -46,12 +50,28 @@ class Api: APIProvider {
                               params: params,
                               header: Header.Empty)
             .map{ res, data -> (StatusCode, String?) in
-                print(res)
                 guard let response = try? JSONDecoder().decode(TokenModel.self, from: data)
                     else { return (StatusCode.failure, nil) }
                 
                 return (self.statusCode(code: res.statusCode),response.token)
-            }
+        }
+    }
+    
+    func PostsList() -> Observable<[PostModel]> {
+        return connector.get(path: PostsApi.getpostlist.getPath(),
+                             params: nil,
+                             header: Header.Authorization)
+            .map{ res,data -> [PostModel] in
+                if res.statusCode == 500 { print("request failure") }
+                
+                guard let response = try? JSONDecoder().decode(PostsListResponse.self, from: data)
+                    else {
+                        print("decode failure")
+                        return []
+                }
+                
+                return response.postlist
+        }
     }
     
 }
