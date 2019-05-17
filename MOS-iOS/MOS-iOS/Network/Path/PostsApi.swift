@@ -13,7 +13,7 @@ enum PostsApi : API {
     func getPath() -> String {
         switch self {
         case .newposts: return "posts/newposts"
-        case .getpostlist: return "posts/getpostlist"
+        case .getpostlist: return "posts/getpostslist"
         case .newcomment: return "posts/newcomment"
         case .getpostdetail: return "posts/getpostdetail"
     }
