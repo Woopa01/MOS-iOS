@@ -8,8 +8,12 @@
 
 import Foundation
 import AsyncDisplayKit
+import RxSwift
+import RxCocoa
 
 class SignInVC : ASViewController<ASDisplayNode>{
+    var viewModel: LoginViewModel!
+    let disposeBag = DisposeBag()
     
     lazy var titleNode: ASTextNode = { () -> ASTextNode in
         let node = ASTextNode()
@@ -19,23 +23,9 @@ class SignInVC : ASViewController<ASDisplayNode>{
         return node
     }()
     
-    lazy var idInputNode: ASEditableTextNode = { () -> ASEditableTextNode in
-        let node = ASEditableTextNode()
-        node.style.preferredSize = CGSize(width: 280.0, height: 20)
-        node.attributedPlaceholderText = NSAttributedString(string: "아이디를 입력해주세요.", attributes: [
-            .font : UIFont.systemFont(ofSize: 20),
-            .foregroundColor : UIColor.lightGray])
-        return node
-    }()
-    
-    lazy var passwordInputNode: ASEditableTextNode = { () -> ASEditableTextNode in
-        let node = ASEditableTextNode()
-        node.style.preferredSize = CGSize(width: 280.0, height: 20)
-        node.attributedPlaceholderText = NSAttributedString(string: "비밀번호를 입력해주세요.", attributes: [
-            .font : UIFont.systemFont(ofSize: 20),
-            .foregroundColor : UIColor.lightGray])
-        return node
-    }()
+    lazy var idInputNode = IdInputNode()
+
+    lazy var passwordInputNode = PasswordInputNode()
     
     lazy var signInButton : ASButtonNode = { () -> ASButtonNode in
         let node = ASButtonNode()
@@ -74,23 +64,25 @@ class SignInVC : ASViewController<ASDisplayNode>{
                                                          justifyContent: .center,
                                                          alignItems: .center,
                                                          children: [idStackLayoutSpec,
-                                                                    passwordStackLayoutSpec,
-                                                                    strongSelf.signInButton])
+                                                                    passwordStackLayoutSpec])
             
-            strongSelf.titleNode.style.spacingAfter = 200.0
+            strongSelf.titleNode.style.spacingAfter = 100.0
             loginStackLayoutSpec.style.spacingAfter = 100.0
+            strongSelf.signInButton.style.spacingAfter = 50.0
             
             return ASStackLayoutSpec(direction: .vertical,
                                      spacing: 0.0,
                                      justifyContent: .center,
                                      alignItems: .center,
                                      children: [strongSelf.titleNode,
-                                                loginStackLayoutSpec])
+                                                loginStackLayoutSpec,
+                                                strongSelf.signInButton])
         }
         
         node.onDidLoad { _ in
             self.navigationController?.isNavigationBarHidden = false
         }
+        bindViewModel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -114,6 +106,45 @@ extension SignInVC {
                                  alignItems: .center,
                                  children: [passwordInputNode,underLineNode2])
     }
-    
-   
 }
+
+extension SignInVC {
+    
+    func initTabBarController() -> UITabBarController{
+        let tabBarController = UITabBarController()
+        let posts = UINavigationController(rootViewController: PostsVC())
+        let user = UINavigationController(rootViewController: MyPageVC())
+        posts.tabBarItem = UITabBarItem(title: "posts", image: nil, selectedImage: nil)
+        user.tabBarItem = UITabBarItem(title: "user", image: nil, selectedImage: nil)
+        tabBarController.setViewControllers([posts, user], animated: false)
+        return tabBarController
+    }
+    
+    func bindViewModel() {
+        viewModel = LoginViewModel()
+        
+        idInputNode.idField?.rx.text
+            .orEmpty
+            .bind(to: viewModel.signInIdInput)
+            .disposed(by: disposeBag)
+        
+        passwordInputNode.passwordField?.rx.text
+            .orEmpty
+            .bind(to: viewModel.signInPasswordInput)
+            .disposed(by: disposeBag)
+        
+        signInButton.rx
+            .tap(to: viewModel.signInDidClicked)
+            .disposed(by: disposeBag)
+        
+        viewModel.signInStatus.asObservable()
+            .subscribe(onNext: { [weak self] isSuccess in
+                guard let `self` = self else { return }
+                if isSuccess {
+                    self.present(self.initTabBarController(), animated: true, completion: nil)
+                }
+            })
+        .disposed(by: disposeBag)
+    }
+}
+
