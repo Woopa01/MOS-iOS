@@ -8,8 +8,12 @@
 
 import Foundation
 import AsyncDisplayKit
+import RxSwift
+import RxCocoa
+import RxCocoa_Texture
 
 class PostsCell : ASCellNode {
+    let disposeBag = DisposeBag()
     
     lazy var authorImageNode: ASNetworkImageNode = {
         let node = ASNetworkImageNode()
@@ -92,11 +96,41 @@ class PostsCell : ASCellNode {
         return node
     }()
     
-    override init() {
+    init(viewModel: PostCellViewModel) {
         super.init()
         self.automaticallyManagesSubnodes = true
         self.backgroundColor = .white
         self.selectionStyle = .none
+        
+        viewModel.authorName
+            .bind(to: authorNameNode.rx.text(defaultTextAttribute),
+                  setNeedsLayout: self)
+            .disposed(by: disposeBag)
+        
+        viewModel.date
+            .bind(to: dateNode.rx.text(defaultTextAttribute),
+                  setNeedsLayout: self)
+            .disposed(by: disposeBag)
+        
+        viewModel.title
+            .bind(to: titleNode.rx.text(titleTextAttribute),
+                  setNeedsLayout: self)
+            .disposed(by: disposeBag)
+        
+        viewModel.content
+            .bind(to: contentNode.rx.text(defaultTextAttribute),
+                  setNeedsLayout: self)
+            .disposed(by: disposeBag)
+        
+        viewModel.voteCount
+            .bind(to: likeTotalNode.rx.text(totalTextAttribute),
+                  setNeedsLayout: self)
+            .disposed(by: disposeBag)
+        
+        viewModel.commentCount
+            .bind(to: commentTotalNode.rx.text(totalTextAttribute),
+                  setNeedsLayout: self)
+            .disposed(by: disposeBag)
     }
     
 }

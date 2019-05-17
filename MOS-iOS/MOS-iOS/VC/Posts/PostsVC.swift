@@ -12,6 +12,9 @@ import RxSwift
 import RxCocoa
 
 class PostsVC : ASViewController<ASTableNode> {
+    var postList: [PostModel] = []
+    var viewModel: PostsViewModel!
+    let disposeBag = DisposeBag()
     
     lazy var appNameNode : ASTextNode = {
         let node = ASTextNode()
@@ -28,8 +31,6 @@ class PostsVC : ASViewController<ASTableNode> {
         tableNode.automaticallyManagesSubnodes = true
         super.init(node: tableNode)
         
-        
-        
         node.onDidLoad { node in
             guard let strongNode = node as? ASTableNode else { return }
             strongNode.view.separatorStyle = .singleLine
@@ -41,8 +42,9 @@ class PostsVC : ASViewController<ASTableNode> {
             self.navigationItem.rightBarButtonItems = [searchBarButton,writeBarButton,filterBarButton]
         }
         
-//        self.node.dataSource = self
-//        self.node.delegate = self
+        self.node.dataSource = self
+        self.node.delegate = self
+        bindViewModel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,15 +54,40 @@ class PostsVC : ASViewController<ASTableNode> {
 
 extension PostsVC : ASTableDelegate, ASTableDataSource{
     func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
+        guard self.postList.count > indexPath.row else { return { ASCellNode() } }
+        
+        let viewModel = PostCellViewModel(model: self.postList[indexPath.row])
+
         return{
-            let cell = PostsCell()
-            cell.authorNameNode.attributedText = NSAttributedString(string: "hello")
+            let cell = PostsCell(viewModel: viewModel)
             return cell
         }
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.postList.count
+    }
+    
+    func numberOfSections(in tableNode: ASTableNode) -> Int {
+        return 1
+    }
+}
+
+extension PostsVC{
+    func bindViewModel(){
+        viewModel = PostsViewModel()
+        
+        rx.viewWillAppear
+            .bind(to: viewModel.ready)
+            .disposed(by: disposeBag)
+        
+        viewModel.postlist.asObservable()
+            .subscribe(onNext: { [weak self] data in
+                guard let `self` = self else { return }
+                self.postList = data
+                self.node.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
 }
 
