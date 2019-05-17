@@ -12,7 +12,7 @@ import RxCocoa
 import RxCocoa_Texture
 
 class SignUpVC : ASViewController<ASDisplayNode> {
-    var viewModel: SignUpViewModel!
+    var viewModel: LoginViewModel!
     let disposeBag = DisposeBag()
     
     lazy var profileImageNode: ASImageNode = {
@@ -127,28 +127,28 @@ extension SignUpVC {
 
 extension SignUpVC {
     func bindViewModel(){
-        viewModel = SignUpViewModel()
+        viewModel = LoginViewModel()
         
         IdEditNode.idField?.rx.text
             .orEmpty
-            .bind(to: viewModel.idInput)
+            .bind(to: viewModel.signUpIdInput)
             .disposed(by: disposeBag)
         
         PassWordEditNode.passwordField?.rx.text
             .orEmpty
-            .bind(to: viewModel.passwordInput)
+            .bind(to: viewModel.signUpPasswordInput)
             .disposed(by: disposeBag)
         
         UserNameEditNode.userNameField?.rx.text
             .orEmpty
-            .bind(to: viewModel.usernameInput)
+            .bind(to: viewModel.signUpUsernameInput)
             .disposed(by: disposeBag)
         
         signUpBtnNode.rx
             .tap(to: viewModel.signUpDidClicked)
             .disposed(by: disposeBag)
         
-        viewModel.status.asObservable()
+        viewModel.signUpStatus.asObservable()
             .subscribe(onNext: { [weak self] isSuccess in
                 guard let `self` = self else { return }
                 if isSuccess {
@@ -164,59 +164,3 @@ extension SignUpVC {
     }
 }
 
-class IdInputNode: ASDisplayNode {
-    
-    var idField: UITextField? {
-        return self.view as? UITextField
-    }
-    
-    override init() {
-        super.init()
-        self.setViewBlock { () -> UIView in
-            let field = UITextField()
-            field.attributedPlaceholder = NSAttributedString(string: "아이디를 입력해주세요.",attributes:
-                [.font: UIFont.systemFont(ofSize: 15),
-                 .foregroundColor: UIColor.gray])
-            return field
-        }
-        self.style.preferredSize = CGSize(width: 280.0, height: 15.0)
-    }
-}
-
-class PasswordInputNode: ASDisplayNode {
-    
-    var passwordField: UITextField? {
-        return self.view as? UITextField
-    }
-    
-    override init() {
-        super.init()
-        self.setViewBlock { () -> UIView in
-            let field = UITextField()
-            field.attributedPlaceholder = NSAttributedString(string: "비밀번호를 입력해주세요.",attributes:
-                [.font: UIFont.systemFont(ofSize: 15),
-                 .foregroundColor: UIColor.gray])
-            return field
-        }
-        self.style.preferredSize = CGSize(width: 280.0, height: 15.0)
-    }
-}
-
-class UserNameInputNode: ASDisplayNode {
-    
-    var userNameField: UITextField? {
-        return self.view as? UITextField
-    }
-    
-    override init() {
-        super.init()
-        self.setViewBlock { () -> UIView in
-            let field = UITextField()
-            field.attributedPlaceholder = NSAttributedString(string: "이름을 입력해주세요.",attributes:
-                [.font: UIFont.systemFont(ofSize: 15),
-                 .foregroundColor: UIColor.gray])
-            return field
-        }
-        self.style.preferredSize = CGSize(width: 280.0, height: 15.0)
-    }
-}
