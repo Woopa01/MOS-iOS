@@ -70,7 +70,11 @@ class PostsCell : ASCellNode {
     
     lazy var likeBtnNode: ASButtonNode = {
         let node = ASButtonNode()
-        node.style.preferredSize = CGSize(width: 25.0, height: 25.0)
+        node.style.flexShrink = 1.0
+        node.style.flexGrow = 0.0
+        node.setImage(UIImage(named: "empty_like")!, for: .normal)
+        node.imageNode.style.preferredSize = CGSize(width: 15.0, height: 15.0)
+        node.style.preferredSize = CGSize(width: 15.0, height: 15.0)
         return node
     }()
     
@@ -84,7 +88,11 @@ class PostsCell : ASCellNode {
     
     lazy var commentBtnNode: ASButtonNode = {
         let node = ASButtonNode()
-        node.style.preferredSize = CGSize(width: 25.0, height: 25.0)
+        node.style.flexGrow = 0.0
+        node.style.flexShrink = 1.0
+        node.imageNode.image = UIImage(named: "comment")
+        node.imageNode.style.preferredSize = CGSize(width: 15.0, height: 15.0)
+        node.style.preferredSize = CGSize(width: 15.0, height: 15.0)
         return node
     }()
     
@@ -141,11 +149,13 @@ extension PostsCell {
         let postLayout = postContentStackinit()
         let likeWithComment = postLikeWithCommentStackinit()
         
-        return ASStackLayoutSpec(direction: .vertical,
-                                 spacing: 100.0,
-                                 justifyContent: .center,
-                                 alignItems: .center,
-                                 children: [profileLayout,postLayout,likeWithComment])
+        let cellStackLayout = ASStackLayoutSpec(direction: .vertical,
+                                                spacing: 0.0,
+                                                justifyContent: .center,
+                                                alignItems: .center,
+                                                children: [profileLayout,postLayout,likeWithComment])
+        
+        return ASInsetLayoutSpec(insets: .init(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0), child: cellStackLayout)
     }
 }
 
@@ -162,14 +172,14 @@ extension PostsCell {
     
     var totalTextAttribute: [NSAttributedString.Key: Any]{
         return [.foregroundColor: UIColor.gray,
-                .font: UIFont.systemFont(ofSize: 13, weight: .medium)]
+                .font: UIFont.systemFont(ofSize: 15, weight: .medium)]
     }
 }
 
 extension PostsCell{
     func profileTextStackinit() -> ASLayoutSpec{
         return ASStackLayoutSpec(direction: .vertical,
-                                 spacing: 0.0,
+                                 spacing: 3.0,
                                  justifyContent: .start,
                                  alignItems: .stretch,
                                  children: [authorNameNode,dateNode])
@@ -177,7 +187,7 @@ extension PostsCell{
     
     func profileContentStackinit() -> ASLayoutSpec{
         return ASStackLayoutSpec(direction: .horizontal,
-                                 spacing: 0.0,
+                                 spacing: 5.0,
                                  justifyContent: .start,
                                  alignItems: .stretch,
                                  children: [authorImageNode,profileTextStackinit()])
@@ -185,23 +195,30 @@ extension PostsCell{
     
     func postContentStackinit() -> ASLayoutSpec{
         return ASStackLayoutSpec(direction: .vertical,
-                                 spacing: 0.0,
+                                 spacing: 10.0,
                                  justifyContent: .start,
                                  alignItems: .stretch,
                                  children: [titleNode,contentNode,underLineNode])
     }
     
     func likeContentStackinit() -> ASLayoutSpec{
+        likeBtnNode.style.flexShrink = 1.0
+        likeBtnNode.style.flexGrow = 0.0
+        
+        
         return ASStackLayoutSpec(direction: .horizontal,
-                                 spacing: 0.0,
+                                 spacing: 10.0,
                                  justifyContent: .start,
                                  alignItems: .stretch,
                                  children: [likeBtnNode,likeTotalNode])
     }
     
     func commentContentStackinit() -> ASLayoutSpec{
+        commentBtnNode.style.flexShrink = 1.0
+        commentBtnNode.style.flexGrow = 0.0
+        commentTotalNode.style.flexGrow = 1.0
         return ASStackLayoutSpec(direction: .horizontal,
-                                 spacing: 0.0,
+                                 spacing: 10.0,
                                  justifyContent: .start,
                                  alignItems: .stretch,
                                  children: [commentBtnNode,commentTotalNode])
@@ -223,7 +240,7 @@ extension PostsCell{
     
     func postLikeWithCommentStackinit() -> ASLayoutSpec{
         return ASStackLayoutSpec(direction: .horizontal,
-                                 spacing: 0.0,
+                                 spacing: 20.0,
                                  justifyContent: .start,
                                  alignItems: .stretch,
                                  children: [likeContentStackinit(),commentContentStackinit()])
