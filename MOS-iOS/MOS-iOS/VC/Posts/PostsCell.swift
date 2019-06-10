@@ -150,7 +150,7 @@ extension PostsCell {
         let likeWithComment = postLikeWithCommentStackinit()
         
         let cellStackLayout = ASStackLayoutSpec(direction: .vertical,
-                                                spacing: 0.0,
+                                                spacing: 30.0,
                                                 justifyContent: .center,
                                                 alignItems: .center,
                                                 children: [profileLayout,postLayout,likeWithComment])
@@ -195,7 +195,7 @@ extension PostsCell{
     
     func postContentStackinit() -> ASLayoutSpec{
         return ASStackLayoutSpec(direction: .vertical,
-                                 spacing: 10.0,
+                                 spacing: 20.0,
                                  justifyContent: .start,
                                  alignItems: .stretch,
                                  children: [titleNode,contentNode,underLineNode])

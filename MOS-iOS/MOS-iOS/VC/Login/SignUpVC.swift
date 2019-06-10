@@ -15,13 +15,12 @@ class SignUpVC : ASViewController<ASDisplayNode> {
     var viewModel: LoginViewModel!
     let disposeBag = DisposeBag()
     
-    lazy var profileImageNode: ASImageNode = {
-        let node = ASImageNode()
+    lazy var profileImageNode: ASNetworkImageNode = {
+        let node = ASNetworkImageNode()
         node.style.preferredSize = CGSize(width: 70.0, height: 70.0)
         node.cornerRadius = 35.0
-        node.borderWidth = 2
-        node.borderColor = UIColor.black.cgColor
-        node.image = UIImage(named: "user")
+        node.borderWidth = 0.5
+        node.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
         return node
     }()
     

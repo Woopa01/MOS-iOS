@@ -13,9 +13,11 @@ import RxCocoa
 class PostsViewModel{
     //Input
     let ready = PublishRelay<Void>()
+    let cellSelected = PublishRelay<IndexPath>()
     
     //Output
     let postlist = BehaviorRelay<[PostModel]>(value: [])
+    let selectedDone = BehaviorRelay<String>(value: "")
     
     let disposeBag = DisposeBag()
     
@@ -31,6 +33,14 @@ class PostsViewModel{
                 self.dependencies.api.PostsList()
             }
             .bind(to: postlist)
+            .disposed(by: disposeBag)
+        
+        cellSelected.asObservable()
+            .withLatestFrom(postlist) { indexpath, items in
+                return items[indexpath.row]
+            }
+            .map { $0.postId }
+            .bind(to: selectedDone)
             .disposed(by: disposeBag)
     }
 }
