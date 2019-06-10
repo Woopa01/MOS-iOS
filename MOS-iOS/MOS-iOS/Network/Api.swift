@@ -17,6 +17,7 @@ protocol Login {
 
 protocol Posts {
     func PostsList() -> Observable<[PostModel]>
+    func PostDetail(id: String) -> Observable<PostModel?>
 }
 
 
@@ -62,7 +63,7 @@ class Api: APIProvider {
                              params: nil,
                              header: Header.Authorization)
             .map{ res,data -> [PostModel] in
-                if res.statusCode == 500 { print("request failure") }
+                if res.statusCode == 500 { print("server error") }
                 
                 guard let response = try? JSONDecoder().decode(PostsListResponse.self, from: data)
                     else {
@@ -72,6 +73,23 @@ class Api: APIProvider {
                 
                 return response.postlist
         }
+    }
+    
+    func PostDetail(id: String) -> Observable<PostModel?> {
+        print("fdsaasdf \(id)")
+        return connector.get(path: PostsApi.getpostdetail.getPath(),
+                             params: ["id" : id],
+                             header: Header.Empty)
+            .map { res, data -> PostModel? in
+                if res.statusCode == 500 { print("server error") }
+                
+                guard let response = try? JSONDecoder().decode(PostModel.self,from: data) else {
+                    print("decode failure")
+                    return nil
+                }
+                
+                return response
+            }
     }
     
 }

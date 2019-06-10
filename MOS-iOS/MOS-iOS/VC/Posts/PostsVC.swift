@@ -10,6 +10,7 @@ import Foundation
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
+import RxCocoa_Texture
 
 class PostsVC : ASViewController<ASTableNode> {
     var postList: [PostModel] = []
@@ -44,6 +45,8 @@ class PostsVC : ASViewController<ASTableNode> {
         
         self.node.dataSource = self
         self.node.delegate = self
+        
+        viewModel = PostsViewModel()
         bindViewModel()
     }
     
@@ -52,12 +55,12 @@ class PostsVC : ASViewController<ASTableNode> {
     }
 }
 
-extension PostsVC : ASTableDelegate, ASTableDataSource{
+extension PostsVC : ASTableDelegate ,ASTableDataSource{
     func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
         guard self.postList.count > indexPath.row else { return { ASCellNode() } }
         
         let viewModel = PostCellViewModel(model: self.postList[indexPath.row])
-
+        
         return{
             let cell = PostsCell(viewModel: viewModel)
             return cell
@@ -71,12 +74,22 @@ extension PostsVC : ASTableDelegate, ASTableDataSource{
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         return 1
     }
+    
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        viewModel.cellSelected.accept(indexPath)
+                
+        viewModel.selectedDone.asObservable()
+            .subscribe(onNext: { postId in
+                UserDefaults.standard.set(postId, forKey: "postID")
+            })
+            .disposed(by: disposeBag)
+        
+        self.navigationController?.pushViewController(PostsDetailVC(), animated: true)
+    }
 }
 
 extension PostsVC{
     func bindViewModel(){
-        viewModel = PostsViewModel()
-        
         rx.viewWillAppear
             .bind(to: viewModel.ready)
             .disposed(by: disposeBag)
@@ -88,6 +101,7 @@ extension PostsVC{
                 self.node.reloadData()
             })
             .disposed(by: disposeBag)
+        
     }
 }
 
@@ -97,10 +111,18 @@ extension PostsVC {
     }
     
     @objc func goWrite(){
-        
+        self.navigationController?.pushViewController(PostWriteVC(), animated: true)
     }
     
     @objc func goFilter(){
+        let alert = UIAlertController(title: "Filtering", message: "보고싶은 카테고리를 골라주세요.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "일상", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "교육", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "금융", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "예술", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "스포츠", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "여행", style: .default, handler: nil))
         
+        self.present(alert, animated: true, completion: nil)
     }
 }

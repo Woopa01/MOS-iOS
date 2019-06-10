@@ -68,6 +68,7 @@ class LoginViewModel {
             .map { status, token in
                 if status == StatusCode.success, token != nil {
                     UserDefaults.standard.set(token, forKey: "token")
+                    print(UserDefaults.standard.value(forKey: "token" as! String))
                     return true
                 } else { return false }
             }

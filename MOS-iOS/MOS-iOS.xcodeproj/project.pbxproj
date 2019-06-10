@@ -24,6 +24,7 @@
 		6838C9B12249F33300FB802A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6838C9AF2249F33300FB802A /* LaunchScreen.storyboard */; };
 		6838C9BC2249F33300FB802A /* MOS_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6838C9BB2249F33300FB802A /* MOS_iOSTests.swift */; };
 		6838C9C72249F33300FB802A /* MOS_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6838C9C62249F33300FB802A /* MOS_iOSUITests.swift */; };
+		6839291222962A020098E185 /* CategoryPickerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839291122962A020098E185 /* CategoryPickerNode.swift */; };
 		6839504E228E4DB100F40BED /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6839504D228E4DB100F40BED /* PostModel.swift */; };
 		68395051228E4F0C00F40BED /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68395050228E4F0C00F40BED /* CommentModel.swift */; };
 		68395053228E500A00F40BED /* ApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68395052228E500A00F40BED /* ApiResponses.swift */; };
@@ -43,6 +44,8 @@
 		68BF6D9722714191007C6DB0 /* MyPageApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BF6D9622714191007C6DB0 /* MyPageApi.swift */; };
 		68E0952B22519A4A004E8ADC /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E0952A22519A4A004E8ADC /* MyPageVC.swift */; };
 		68E0952F22519A8D004E8ADC /* PostsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E0952E22519A8D004E8ADC /* PostsVC.swift */; };
+		68F695C0229BD73700D0C803 /* PostsDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F695BF229BD73700D0C803 /* PostsDetailVC.swift */; };
+		68F695C4229D12CE00D0C803 /* PostsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F695C3229D12CE00D0C803 /* PostsDetailViewModel.swift */; };
 		D98E771418BAD35F8E1CE200 /* Pods_MOS_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89381DDD70219252A742CF7 /* Pods_MOS_iOSUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +91,7 @@
 		6838C9C22249F33300FB802A /* MOS-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MOS-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6838C9C62249F33300FB802A /* MOS_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOS_iOSUITests.swift; sourceTree = "<group>"; };
 		6838C9C82249F33300FB802A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6839291122962A020098E185 /* CategoryPickerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerNode.swift; sourceTree = "<group>"; };
 		6839504D228E4DB100F40BED /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		68395050228E4F0C00F40BED /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		68395052228E500A00F40BED /* ApiResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponses.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 		68BF6D9622714191007C6DB0 /* MyPageApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageApi.swift; sourceTree = "<group>"; };
 		68E0952A22519A4A004E8ADC /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		68E0952E22519A8D004E8ADC /* PostsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsVC.swift; sourceTree = "<group>"; };
+		68F695BF229BD73700D0C803 /* PostsDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsDetailVC.swift; sourceTree = "<group>"; };
+		68F695C3229D12CE00D0C803 /* PostsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsDetailViewModel.swift; sourceTree = "<group>"; };
 		84F4AFAB072E2207B7CFE490 /* Pods-MOS-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MOS-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MOS-iOS/Pods-MOS-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9419DB723ED3221E81C298F8 /* Pods_MOS_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MOS_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A89381DDD70219252A742CF7 /* Pods_MOS_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MOS_iOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -296,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				6839D8B9228D32A4002C1135 /* LoginNodes.swift */,
+				6839291122962A020098E185 /* CategoryPickerNode.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,6 +312,7 @@
 			children = (
 				6839DA42227707BC00AA12D6 /* PostsViewModel.swift */,
 				68395054228E804F00F40BED /* PostCellViewModel.swift */,
+				68F695C3229D12CE00D0C803 /* PostsDetailViewModel.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -315,6 +323,7 @@
 				68E0952E22519A8D004E8ADC /* PostsVC.swift */,
 				68420A262275E225001AD39E /* PostsCell.swift */,
 				683ADCF522940FCB005A4984 /* PostWriteVC.swift */,
+				68F695BF229BD73700D0C803 /* PostsDetailVC.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -602,6 +611,7 @@
 				683ADCF622940FCB005A4984 /* PostWriteVC.swift in Sources */,
 				68386BCE2250F917007BEB71 /* SignUpVC.swift in Sources */,
 				6839DA452277090C00AA12D6 /* Api.swift in Sources */,
+				68F695C0229BD73700D0C803 /* PostsDetailVC.swift in Sources */,
 				68236B54226707F8007BB672 /* LoginViewModel.swift in Sources */,
 				6838C9AC2249F33100FB802A /* MOS_iOS.xcdatamodeld in Sources */,
 				683D76D3226E8A7300ED1248 /* Connector.swift in Sources */,
@@ -609,10 +619,12 @@
 				68236B50226703BA007BB672 /* StartViewModel.swift in Sources */,
 				68395051228E4F0C00F40BED /* CommentModel.swift in Sources */,
 				6801599E2265B61C00C003FA /* Base.swift in Sources */,
+				6839291222962A020098E185 /* CategoryPickerNode.swift in Sources */,
 				68386BC92250F422007BEB71 /* Colors.swift in Sources */,
 				68386BCC2250F8D5007BEB71 /* StartVC.swift in Sources */,
 				6839504E228E4DB100F40BED /* PostModel.swift in Sources */,
 				68E0952B22519A4A004E8ADC /* MyPageVC.swift in Sources */,
+				68F695C4229D12CE00D0C803 /* PostsDetailViewModel.swift in Sources */,
 				680B10CE226D54C400166458 /* APIProtocol.swift in Sources */,
 				6838C9A42249F33100FB802A /* AppDelegate.swift in Sources */,
 				6801599C226552C400C003FA /* SignInVC.swift in Sources */,
